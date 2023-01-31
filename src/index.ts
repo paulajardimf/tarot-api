@@ -1,5 +1,3 @@
-//estou tentando renderizar a imagem da minha carta, mas não está funcionando
-
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { cards } from "./database";
@@ -58,7 +56,7 @@ app.get("/cards/:name", (req: Request, res: Response) => {
 });
 
 // uma carta específica por id
-app.get("/cards/:id", (req: Request, res: Response) => {
+app.get("/cards/id/:id", (req: Request, res: Response) => {
   const id = req.params.id as string;
 
   const card = cards.find((card) => card.id === id);
