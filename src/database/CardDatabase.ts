@@ -1,6 +1,6 @@
-import { Arcana, Suit, TCard } from "./types";
+import { Arcana, Suit, TCard } from "../types";
 
-export const cards: TCard[] = [
+export const CardDatabase: TCard[] = [
   {
     id: "00",
     number: 0,

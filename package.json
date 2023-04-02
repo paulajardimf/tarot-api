@@ -5,8 +5,8 @@
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node ./build/index.js",
-    "dev": "ts-node-dev src/index.ts",
+    "start": "node ./build/index.js",
+    "dev": "ts-node-dev ./src/index.ts",
     "build": "tsc"
   },
   "author": "Paula Jardim Ferreira",
