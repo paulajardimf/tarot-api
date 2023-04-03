@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { CardBusiness } from "../business/CardBusiness";
-import { CardDatabase } from "../database/CardDatabase";
 
 export class CardController {
   constructor(private cardsBusiness: CardBusiness) {}
