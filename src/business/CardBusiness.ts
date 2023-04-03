@@ -66,16 +66,19 @@ export class CardBusiness {
       throw new Error("Carta não encontrada");
     }
 
-    // const card = new Card(
-    //   cardDB.id,
-    //   cardDB.number,
-    //   cardDB.name,
-    //   cardDB.img,
-    //   cardDB.arcana,
-    //   cardDB.suit
-    // );
+    const cards = cardDB.map((cardDB) => {
+      const card = new Card(
+        cardDB.id,
+        cardDB.number,
+        cardDB.name,
+        cardDB.img,
+        cardDB.arcana,
+        cardDB.suit
+      );
+      return card;
+    });
 
-    return cardDB;
+    return cards;
   };
 
   public getCardById = async (id: string) => {
