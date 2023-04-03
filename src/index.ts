@@ -1,6 +1,7 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
 import { cardRouter } from "./routers/cardRouter";
+import { spreadRouter } from "./routers/spreadRouter";
 
 const app = express();
 
@@ -12,3 +13,4 @@ app.listen(3003, () => {
 });
 
 app.use("/cards", cardRouter);
+app.use("/spreads", spreadRouter);
