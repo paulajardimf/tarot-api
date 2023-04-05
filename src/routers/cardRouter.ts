@@ -1,12 +1,15 @@
 import express from "express";
 import { CardBusiness } from "../business/CardBusiness";
 import { CardController } from "../controller/CardController";
+import { CardDatabase } from "../database/CardDatabase";
 
 export const cardRouter = express.Router()
 
 const cardController = new CardController(
   new CardBusiness(
+    new CardDatabase()
   )
+  
 )
 
 cardRouter.get("/", cardController.getAllCards)
