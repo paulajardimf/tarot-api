@@ -1,11 +1,15 @@
-import { CardDatabase } from "../database/CardDatabase";
 import { Arcana, TCard } from "../types";
 import { Card } from "../models/Card";
 import path from "path";
+import { CardDatabase } from "../database/CardDatabase";
 
 export class CardBusiness {
+  constructor(private cardDatabase: CardDatabase) {}
+
   public getAllCards = async () => {
-    const cards = CardDatabase.map((cardDB) => {
+    const cardsDatabase = await this.cardDatabase.getAllCards();
+
+    const cards = cardsDatabase.map((cardDB) => {
       const card = new Card(
         cardDB.id,
         cardDB.number,
@@ -20,7 +24,7 @@ export class CardBusiness {
   };
 
   public getAllAleatoryCards = async () => {
-    const cardsDB = await this.getAllCards();
+    const cardsDB = await this.cardDatabase.getAllCards();
 
     function shuffleCards(array: any) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -49,9 +53,8 @@ export class CardBusiness {
   };
 
   public getAllMajorArcanaCards = async () => {
-    const majorCards = CardDatabase.filter(
-      (card) => card.arcana === Arcana.MAJOR_ARCANA
-    );
+    const majorCards = await this.cardDatabase.getAllMajorArcanaCards();
+
     const cards = majorCards.map((cardDB) => {
       const card = new Card(
         cardDB.id,
@@ -67,7 +70,7 @@ export class CardBusiness {
   };
 
   public getAllAleatoryMajorArcanaCards = async () => {
-    const cardsDB = await this.getAllMajorArcanaCards();
+    const cardsDB = await this.cardDatabase.getAllMajorArcanaCards();
 
     function shuffleCards(array: any) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -96,9 +99,8 @@ export class CardBusiness {
   };
 
   public getAllMinorArcanaCards = async () => {
-    const minorCards = CardDatabase.filter(
-      (card) => card.arcana === Arcana.MINOR_ARCANA
-    );
+    const minorCards = await this.cardDatabase.getAllMinorArcanaCards();
+
     const cards = minorCards.map((cardDB) => {
       const card = new Card(
         cardDB.id,
@@ -114,7 +116,7 @@ export class CardBusiness {
   };
 
   public getAllAleatoryMinorArcanaCards = async () => {
-    const cardsDB = await this.getAllMinorArcanaCards();
+    const cardsDB = await this.cardDatabase.getAllMinorArcanaCards();
 
     function shuffleCards(array: any) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -147,7 +149,7 @@ export class CardBusiness {
       throw new Error("Nome não enviado!");
     }
 
-    const cardDB = CardDatabase.filter((card) => card.name.includes(name));
+    const cardDB = await this.cardDatabase.getCardByName(name);
 
     if (!cardDB) {
       throw new Error("Carta não encontrada");
@@ -169,7 +171,7 @@ export class CardBusiness {
   };
 
   public getCardById = async (id: string) => {
-    const card = CardDatabase.find((card) => card.id === id);
+    const card = await this.cardDatabase.getCardById(id);
 
     if (!card) {
       throw new Error("Carta não encontrada");
@@ -179,12 +181,13 @@ export class CardBusiness {
   };
 
   public getCardImageById = async (id: string) => {
-    const card = CardDatabase.find((card) => card.id === id);
+    const cardImg = await this.cardDatabase.getCardImageById(id);    
 
-    if (!card) {
+    if (!cardImg) {
       throw new Error("Carta não encontrada");
     }
-    const imgPath = path.join(__dirname, `${card.img}`);
+
+    const imgPath = path.join(__dirname,`../public/images/${cardImg}`);
 
     return imgPath;
   };
