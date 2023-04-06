@@ -1,4 +1,4 @@
-# Labeddit Back End
+# Tarot API
 ![Badge Em Andamento](http://img.shields.io/static/v1?label=STATUS&message=EM+ANDAMENTO&color=red&style=for-the-badge)
 
 ## Índice
